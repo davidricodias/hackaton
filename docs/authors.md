@@ -2,4 +2,4 @@
 :relative-docs: docs/
 :relative-images:
 ```
-Aryan Verma 
+Aryan Verma (Learing Spanish lol)
