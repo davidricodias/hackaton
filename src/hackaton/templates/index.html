@@ -95,7 +95,7 @@
                     <img src="{{ url_for('static', filename='images/axa-logo.PNG') }}" alt="AXA Logo" class="axa-logo">
                 </div>
                 <div>
-                    <a href="https://www.axa.co.uk/contact-us/" class="axa-btn-secondary">Contact Us</a>
+                    <a target="_blank" href="https://www.axa.co.uk/contact-us/" class="axa-btn-secondary">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -222,6 +222,7 @@
                         <div class="text-center p-4 bg-light rounded">
                             <h5 class="mb-3">Recommended Compensation Amount:</h5>
                             <div class="compensation-amount mb-3" id="compensationAmount">$0.00</div>
+                            <div class="compensation-amount mb-3" id="compensationDescription">""</div>
                             <p class="text-muted mb-0">Based on the damage assessment from your image and description</p>
                         </div>
                     </div>
@@ -352,6 +353,7 @@
             const confidenceScores = document.getElementById('confidenceScores');
             const damageDescription = document.getElementById('damageDescription');
             const compensationAmount = document.getElementById('compensationAmount');
+            const compensationDescription = document.getElementById('compensationDescription');
             const loadingCard = document.getElementById('loading');
             const loadingText = document.getElementById('loadingText');
             const aiWarning = document.getElementById('aiWarning');
@@ -394,7 +396,7 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         previewImage.src = e.target.result;
-                        
+
                         // Show upload success modal
                         const uploadSuccessModal = new bootstrap.Modal(document.getElementById('uploadSuccessModal'));
                         uploadSuccessModal.show();
@@ -515,7 +517,7 @@
                 // Show loading indicators
                 loadingText.textContent = 'Calculating compensation...';
                 loadingCard.style.display = 'block';
-                
+
                 // Show spinner in button and disable button
                 document.getElementById('calculateSpinner').style.display = 'inline-block';
                 calculateBtn.disabled = true;
@@ -540,7 +542,8 @@
                     // Display compensation results
                     compensationContainer.style.display = 'block';
                     compensationAmount.textContent = data.compensation;
-                    
+                    compensationDescription.textContent = data.description;
+
                     // Show the claim form once compensation is calculated
                     document.getElementById('claimFormContainer').style.display = 'block';
                 })
@@ -549,28 +552,28 @@
                     loadingCard.style.display = 'none';
                     document.getElementById('calculateSpinner').style.display = 'none';
                     calculateBtn.disabled = false;
-                    
+
                     alert('Error: ' + error.message);
                 });
             });
-            
+
             // Handle claim form submission
             document.getElementById('claimForm').addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
                 const fullName = document.getElementById('fullName').value.trim();
                 const email = document.getElementById('email').value.trim();
                 const insuranceNumber = document.getElementById('insuranceNumber').value.trim();
-                
+
                 if (!fullName || !email || !insuranceNumber) {
                     alert('Please fill out all fields');
                     return;
                 }
-                
+
                 // Show loading spinner
                 document.getElementById('submitClaimSpinner').style.display = 'inline-block';
                 document.getElementById('submitClaimBtn').disabled = true;
-                
+
                 // Create form data for submission
                 const formData = new FormData();
                 formData.append('file', currentFile);
@@ -579,7 +582,7 @@
                 formData.append('email', email);
                 formData.append('insurance_number', insuranceNumber);
                 formData.append('compensation', compensationAmount.textContent);
-                
+
                 // Send request to server
                 fetch('/submit_claim', {
                     method: 'POST',
@@ -590,16 +593,16 @@
                     // Hide loading spinner
                     document.getElementById('submitClaimSpinner').style.display = 'none';
                     document.getElementById('submitClaimBtn').disabled = false;
-                    
+
                     if (data.error) {
                         alert('Error: ' + data.error);
                         return;
                     }
-                    
+
                     // Show confirmation modal
                     const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
                     confirmationModal.show();
-                    
+
                     // Reset the form
                     document.getElementById('claimForm').reset();
                 })
@@ -607,7 +610,7 @@
                     // Hide loading spinner
                     document.getElementById('submitClaimSpinner').style.display = 'none';
                     document.getElementById('submitClaimBtn').disabled = false;
-                    
+
                     alert('Error: ' + error.message);
                 });
             });
