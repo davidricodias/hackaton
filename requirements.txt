@@ -16,10 +16,10 @@ pytest-cov
 recommonmark
 scipy
 seaborn
+selenium
 sphinx
 tox
 tqdm
-selenium
 webdriver-manager
 
 # Uncomment if needed
