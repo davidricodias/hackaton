@@ -19,6 +19,8 @@ seaborn
 sphinx
 tox
 tqdm
+selenium
+webdriver-manager
 
 # Uncomment if needed
 # statsmodels
