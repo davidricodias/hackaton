@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 6px 10px rgba(0,0,0,.08);
+            transition: all .3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,.12);
+        }
+        .upload-area {
+            border: 2px dashed #6c757d;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+        .upload-area:hover {
+            background-color: #e9ecef;
+            border-color: #495057;
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            transform: translateY(-2px);
+        }
+        .results-container, .description-container, .compensation-container {
+            display: none;
+        }
+        .preview-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+        }
+        .progress {
+            height: 15px;
+            border-radius: 10px;
+        }
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+        #loading {
+            display: none;
+            padding: 20px;
+        }
+        #confidenceBar {
+            height: 20px;
+        }
+        .error-message {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .compensation-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #198754;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold mb-3">Damage Compensation Analyzer</h1>
+                    <p class="lead text-muted">Upload an image of the damage to analyze and calculate compensation</p>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body p-4">
+                        <h4 class="card-title mb-4"><i class="fas fa-cloud-upload-alt me-2"></i>Upload Image</h4>
+
+                        <div class="upload-area mb-3" id="dropZone">
+                            <input type="file" id="fileInput" class="d-none" accept="image/*">
+                            <i class="fas fa-image fa-3x mb-3 text-muted"></i>
+                            <h5>Drag & Drop or Click to Upload</h5>
+                            <p class="text-muted">Support for JPG, PNG images</p>
+                        </div>
+
+                        <div class="text-center">
+                            <button id="uploadBtn" class="btn btn-primary"><i class="fas fa-search me-2"></i>Analyze Image</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="loading" class="card mb-4 text-center">
+                    <div class="card-body p-4">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <h5 id="loadingText">Processing your image...</h5>
+                        <p class="text-muted">This may take a few moments</p>
+                    </div>
+                </div>
+
+                <div id="resultsContainer" class="results-container">
+                    <div class="card mb-4">
+                        <div class="card-body p-4">
+                            <h4 class="card-title mb-4"><i class="fas fa-eye me-2"></i>Preview</h4>
+                            <div class="text-center mb-3">
+                                <img id="previewImage" class="preview-image" src="" alt="Uploaded image preview">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-body p-4">
+                            <h4 class="card-title mb-4"><i class="fas fa-robot me-2"></i>AI Detection Results</h4>
+
+                            <div class="mb-4">
+                                <h5 id="detectionResult" class="mb-3">-</h5>
+                                <div class="progress mb-2">
+                                    <div id="confidenceBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small>Human-Generated</small>
+                                    <small>AI-Generated</small>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <h5 class="mb-3">Confidence Scores:</h5>
+                                <ul class="list-group" id="confidenceScores">
+                                    <!-- Scores will be added here dynamically -->
+                                </ul>
+                            </div>
+
+                            <div id="aiWarning" class="mt-4 p-3 bg-danger text-white rounded" style="display: none;">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>Warning:</strong> This image appears to be AI-generated and cannot be processed for compensation.
+                            </div>
+
+                            <div id="humanConfirmation" class="mt-4 p-3 bg-success text-white rounded" style="display: none;">
+                                <i class="fas fa-check-circle me-2"></i>
+                                <strong>Verified:</strong> This image appears to be real. Please provide a description below.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="descriptionContainer" class="description-container card mb-4">
+                    <div class="card-body p-4">
+                        <h4 class="card-title mb-4"><i class="fas fa-comment-alt me-2"></i>Damage Description</h4>
+
+                        <div class="mb-3">
+                            <label for="damageDescription" class="form-label">Please describe the damage shown in the image:</label>
+                            <textarea id="damageDescription" class="form-control" rows="4" placeholder="Describe the damage in detail..."></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button id="calculateBtn" class="btn btn-primary"><i class="fas fa-calculator me-2"></i>Calculate Compensation</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="compensationContainer" class="compensation-container card">
+                    <div class="card-body p-4">
+                        <h4 class="card-title mb-4"><i class="fas fa-money-bill-wave me-2"></i>Compensation Result</h4>
+
+                        <div class="text-center p-4 bg-light rounded">
+                            <h5 class="mb-3">Recommended Compensation Amount:</h5>
+                            <div class="compensation-amount mb-3" id="compensationAmount">$0.00</div>
+                            <p class="text-muted mb-0">Based on the damage assessment from your image and description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropZone = document.getElementById('dropZone');
+            const fileInput = document.getElementById('fileInput');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const descriptionContainer = document.getElementById('descriptionContainer');
+            const compensationContainer = document.getElementById('compensationContainer');
+            const previewImage = document.getElementById('previewImage');
+            const detectionResult = document.getElementById('detectionResult');
+            const confidenceBar = document.getElementById('confidenceBar');
+            const confidenceScores = document.getElementById('confidenceScores');
+            const damageDescription = document.getElementById('damageDescription');
+            const compensationAmount = document.getElementById('compensationAmount');
+            const loadingCard = document.getElementById('loading');
+            const loadingText = document.getElementById('loadingText');
+            const aiWarning = document.getElementById('aiWarning');
+            const humanConfirmation = document.getElementById('humanConfirmation');
+
+            let currentFile = null;
+
+            // Handle click on drop zone
+            dropZone.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            // Handle file selection
+            fileInput.addEventListener('change', handleFileSelect);
+
+            // Handle drag and drop
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('bg-light');
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('bg-light');
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('bg-light');
+
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileSelect();
+                }
+            });
+
+            // Handle file preview
+            function handleFileSelect() {
+                const file = fileInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                    currentFile = file;
+                }
+            }
+
+            // Handle upload button click
+            uploadBtn.addEventListener('click', () => {
+                if (!currentFile) {
+                    alert('Please select an image file first');
+                    return;
+                }
+
+                // Reset UI
+                resultsContainer.style.display = 'none';
+                descriptionContainer.style.display = 'none';
+                compensationContainer.style.display = 'none';
+                aiWarning.style.display = 'none';
+                humanConfirmation.style.display = 'none';
+
+                // Create form data
+                const formData = new FormData();
+                formData.append('file', currentFile);
+
+                // Show loading indicator
+                loadingText.textContent = 'Analyzing your image...';
+                loadingCard.style.display = 'block';
+
+                // Send request to server
+                fetch('/detect', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Hide loading indicator
+                    loadingCard.style.display = 'none';
+
+                    if (data.error) {
+                        alert('Error: ' + data.error);
+                        return;
+                    }
+
+                    // Display results
+                    resultsContainer.style.display = 'block';
+
+                    // Process detection results
+                    const results = data.detection_results;
+
+                    // Clear previous scores
+                    confidenceScores.innerHTML = '';
+
+                    // Add each score to the list
+                    results.forEach(result => {
+                        const listItem = document.createElement('li');
+                        listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+
+                        const label = document.createElement('span');
+                        label.textContent = result.label.charAt(0).toUpperCase() + result.label.slice(1);
+
+                        const badge = document.createElement('span');
+                        badge.className = 'badge bg-primary rounded-pill';
+                        badge.textContent = (result.score * 100).toFixed(2) + '%';
+
+                        listItem.appendChild(label);
+                        listItem.appendChild(badge);
+                        confidenceScores.appendChild(listItem);
+
+                        // If this is the artificial/AI score, update the progress bar
+                        if (result.label.toLowerCase() === 'artificial') {
+                            const aiScore = result.score * 100;
+                            confidenceBar.style.width = aiScore + '%';
+
+                            if (aiScore > 50) {
+                                confidenceBar.className = 'progress-bar bg-danger';
+                                detectionResult.textContent = 'Likely AI-Generated';
+                                detectionResult.className = 'mb-3 text-danger';
+                                aiWarning.style.display = 'block';
+                            } else {
+                                confidenceBar.className = 'progress-bar bg-success';
+                                detectionResult.textContent = 'Likely Human-Generated';
+                                detectionResult.className = 'mb-3 text-success';
+                                humanConfirmation.style.display = 'block';
+                                // Show the description input for real images
+                                descriptionContainer.style.display = 'block';
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    loadingCard.style.display = 'none';
+                    alert('Error: ' + error.message);
+                });
+            });
+
+            // Handle calculate button click
+            calculateBtn.addEventListener('click', () => {
+                const description = damageDescription.value.trim();
+
+                if (!description) {
+                    alert('Please provide a description of the damage');
+                    return;
+                }
+
+                if (!currentFile) {
+                    alert('Please select an image file');
+                    return;
+                }
+
+                // Create form data
+                const formData = new FormData();
+                formData.append('file', currentFile);
+                formData.append('description', description);
+
+                // Show loading indicator
+                loadingText.textContent = 'Calculating compensation...';
+                loadingCard.style.display = 'block';
+
+                // Send request to server
+                fetch('/calculate_compensation', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Hide loading indicator
+                    loadingCard.style.display = 'none';
+
+                    if (data.error) {
+                        alert('Error: ' + data.error);
+                        return;
+                    }
+
+                    // Display compensation results
+                    compensationContainer.style.display = 'block';
+                    compensationAmount.textContent = data.compensation;
+                })
+                .catch(error => {
+                    loadingCard.style.display = 'none';
+                    alert('Error: ' + error.message);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
