@@ -20,6 +20,7 @@ recommonmark
 scikit-learn
 scipy
 seaborn
+selenium
 sphinx
 tensorflow
 tf-keras
@@ -28,7 +29,7 @@ torch-vision
 tox
 tqdm
 transformers
-
+webdriver-manager
 
 # Uncomment if needed
 # statsmodels

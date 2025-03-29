@@ -6,3 +6,11 @@
 !external
 !processed
 !interim
+!ai
+!real
+!compensation_table.csv
+!create_table_compensation.py
+!descriptions.csv
+!descriptions.json
+!download_dataset.py
+!urls_img.txt

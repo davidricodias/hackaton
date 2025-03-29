@@ -1,0 +1,143 @@
+[
+    {
+        "description":"Pequeñas manchas de humedad en la pared del dormitorio. La pintura comienza a abombarse y hay un leve cambio de color en la superficie. No hay moho visible, pero el olor a humedad es perceptible."
+    },
+    {
+        "description":"Filtración de agua en el techo de la cocina. Se observan gotas acumuladas y la pintura empieza a desprenderse. La humedad se extiende lentamente hacia las paredes cercanas."
+    },
+    {
+        "description":"Manchas de moho negro en las esquinas del baño. Las juntas de los azulejos están ennegrecidas y la ventilación deficiente ha intensificado el problema. Se nota un fuerte olor a humedad."
+    },
+    {
+        "description":"Techo de yeso con pintura descascarada por filtraciones. La humedad ha debilitado la estructura y se observan grietas en la superficie. Hay riesgo de que parte del techo se desprenda."
+    },
+    {
+        "description":"Armarios de madera en la cocina afectados por humedad. La superficie está hinchada y comienza a desprender un olor a moho. Las bisagras metálicas presentan signos de oxidación."
+    },
+    {
+        "description":"Sótano con paredes cubiertas de manchas de humedad. El suelo está húmedo y algunos muebles almacenados han comenzado a deteriorarse. Hay presencia de moho blanco en las esquinas."
+    },
+    {
+        "description":"Humedad en vigas de madera del techo. La madera se ve oscura y frágil, con signos de pudrición. Si no se trata, puede comprometer la estructura de la vivienda."
+    },
+    {
+        "description":"Goteras en el garaje de una casa. El agua cae directamente sobre el capó del coche y ha dejado manchas en el suelo. En las paredes, la humedad ha generado moho verde."
+    },
+    {
+        "description":"Moqueta de oficina con manchas de humedad. La tela ha absorbido la filtración y el olor a moho es fuerte. Algunas sillas metálicas cercanas muestran signos de oxidación."
+    },
+    {
+        "description":"Pared exterior de una fábrica con manchas verdosas por filtraciones. La pintura se ha desprendido y el material de la fachada comienza a deteriorarse."
+    },
+    {
+        "description":"Humedad en un almacén comercial. Las cajas de cartón almacenadas han comenzado a debilitarse por la humedad. Se observan hongos en las paredes y un olor desagradable en la zona."
+    },
+    {
+        "description":"Grietas en el techo de una nave industrial por filtración de agua. La humedad ha debilitado las estructuras metálicas, aumentando el riesgo de corrosión."
+    },
+    {
+        "description":"Filtraciones en las ventanas de un restaurante. El agua se acumula en los marcos y ha comenzado a gotear sobre las mesas. La madera de los muebles muestra signos de hinchazón."
+    },
+    {
+        "description":"Tuberías en mal estado provocando humedad en un baño. La pintura de la pared se está desprendiendo y las baldosas están perdiendo adherencia."
+    },
+    {
+        "description":"Filtración de agua en una bodega subterránea. Las paredes de piedra están húmedas y algunas botellas han sido afectadas por moho."
+    },
+    {
+        "description":"Vestuario de gimnasio con paredes mohosas. La mala ventilación ha provocado la proliferación de hongos y el mal olor es evidente."
+    },
+    {
+        "description":"Techo de oficina con manchas de humedad alrededor de las lámparas. El material de yeso comienza a agrietarse y se observan gotas en algunas zonas."
+    },
+    {
+        "description":"Humidificación excesiva en una librería. Algunos libros tienen páginas arrugadas y cubiertas con manchas de moho."
+    },
+    {
+        "description":"Escenario de teatro con telones afectados por humedad. La tela tiene manchas oscuras y la madera del piso está hinchada."
+    },
+    {
+        "description":"Humedad en una escuela. Las paredes de las aulas tienen grandes manchas de moho y la pintura está descascarada."
+    },
+    {
+        "description":"Cámara frigorífica con condensación excesiva. El agua acumulada en el suelo ha generado resbalones y algunos productos han sido afectados."
+    },
+    {
+        "description":"Taller mecánico con filtraciones en el techo. Se observan charcos en el suelo y herramientas con signos de corrosión."
+    },
+    {
+        "description":"Filtración de agua en un hospital. El pasillo subterráneo presenta paredes mojadas y charcos en el suelo. Hay riesgo de afectación al sistema eléctrico."
+    },
+    {
+        "description":"Edificio de apartamentos con filtraciones en el garaje. Las paredes están cubiertas de manchas verdosas y el suelo presenta charcos constantes."
+    },
+    {
+        "description":"Supermercado con goteras en la zona de almacenamiento. Se han tenido que desechar cajas de productos afectados por la humedad."
+    },
+    {
+        "description":"Casa rural con cimientos afectados por la humedad. Se observan grietas en las paredes y las juntas de piedra han comenzado a deshacerse."
+    },
+    {
+        "description":"Hotel con problemas de humedad en habitaciones. Algunas paredes tienen moho visible y el olor a humedad es fuerte."
+    },
+    {
+        "description":"Fábrica con maquinaria afectada por humedad ambiental. Algunas piezas metálicas presentan corrosión avanzada y requieren mantenimiento."
+    },
+    {
+        "description":"Gimnasio con espejos empañados y moho en las esquinas. La mala ventilación ha provocado la acumulación de humedad en el ambiente."
+    },
+    {
+        "description":"Nave industrial con suelo de cemento resquebrajado por filtraciones. En algunas zonas, la humedad ha debilitado la estructura."
+    },
+    {
+        "description":"Apartamento con suelo de parquet hinchado por filtraciones. La madera ha comenzado a levantarse y el problema se extiende por varias habitaciones."
+    },
+    {
+        "description":"Escalera de emergencia de metal oxidada por la humedad. La estructura se ve debilitada y algunas zonas presentan corrosión avanzada."
+    },
+    {
+        "description":"Techo de almacén con goteras constantes. El agua cae sobre estanterías de productos, poniendo en riesgo la mercancía almacenada."
+    },
+    {
+        "description":"Bodega de vino con problemas de humedad en las barricas. La madera ha empezado a deteriorarse y algunas botellas muestran signos de afectación."
+    },
+    {
+        "description":"Centro comercial con filtraciones en el techo. La humedad ha dejado manchas oscuras y algunas zonas presentan desprendimiento de pintura."
+    },
+    {
+        "description":"Aeropuerto con goteras en la terminal de embarque. El agua se acumula en el suelo y algunas estructuras metálicas muestran corrosión."
+    },
+    {
+        "description":"Residencia de ancianos con humedad en las habitaciones. El moho ha aparecido en algunas paredes y hay olor persistente a humedad."
+    },
+    {
+        "description":"Biblioteca con documentos antiguos afectados por la humedad. Las páginas están amarillentas y algunas se han pegado entre sí."
+    },
+    {
+        "description":"Clínica veterinaria con filtraciones en la zona de quirófano. La humedad amenaza la esterilidad del área y se requieren reparaciones inmediatas."
+    },
+    {
+        "description":"Universidad con techos dañados por filtraciones. En algunas aulas, la humedad ha provocado el desprendimiento de pintura y moho en las esquinas."
+    },
+    {
+        "description":"Humedad en una tienda de ropa. Los estantes de madera están hinchados y algunas prendas muestran signos de moho."
+    },
+    {
+        "description":"Edificio gubernamental con filtraciones en el techo de los despachos. El agua cae sobre escritorios y documentos importantes."
+    },
+    {
+        "description":"Planta de producción con humedad en el suelo. Se han formado charcos en zonas críticas, afectando la seguridad del personal."
+    },
+    {
+        "description":"Centro deportivo con humedad en los vestuarios. Las taquillas metálicas están oxidadas y las paredes presentan hongos visibles."
+    },
+    {
+        "description":"Oficinas con paredes cubiertas de moho. El problema se ha extendido y algunos equipos electrónicos comienzan a verse afectados."
+    },
+    {
+        "description":"Humedad en una galería de arte. Algunas obras han sido dañadas por la alta humedad del ambiente."
+    },
+    {
+        "description":"Centro de datos con humedad afectando servidores. El riesgo de fallos eléctricos es elevado y se requieren soluciones inmediatas."
+    }
+]
