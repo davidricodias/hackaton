@@ -76,6 +76,13 @@
             font-weight: bold;
             color: #198754;
         }
+        .claim-form-container {
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        .modal-header.bg-success {
+            background-color: #198754 !important;
+        }
     </style>
 </head>
 <body>
@@ -148,7 +155,7 @@
 
                             <div id="aiWarning" class="mt-4 p-3 bg-danger text-white rounded" style="display: none;">
                                 <i class="fas fa-exclamation-triangle me-2"></i>
-                                <strong>Warning:</strong> This image appears to be AI-generated and cannot be processed for compensation.
+                                <strong>Warning:</strong> This image appears to be AI-generated and cannot be processed for compensation. Please upload a genuine photo of the actual damage.
                             </div>
 
                             <div id="humanConfirmation" class="mt-4 p-3 bg-success text-white rounded" style="display: none;">
@@ -169,7 +176,12 @@
                         </div>
 
                         <div class="text-center">
-                            <button id="calculateBtn" class="btn btn-primary"><i class="fas fa-calculator me-2"></i>Calculate Compensation</button>
+                            <button id="calculateBtn" class="btn btn-primary">
+                                <i class="fas fa-calculator me-2"></i>Calculate Compensation
+                                <span id="calculateSpinner" class="spinner-border spinner-border-sm ms-2" role="status" style="display: none;">
+                                    <span class="visually-hidden">Loading...</span>
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -184,6 +196,56 @@
                             <p class="text-muted mb-0">Based on the damage assessment from your image and description</p>
                         </div>
                     </div>
+                </div>
+
+                <div id="claimFormContainer" class="claim-form-container card mb-4" style="display: none;">
+                    <div class="card-body p-4">
+                        <h4 class="card-title mb-4"><i class="fas fa-file-signature me-2"></i>Submit Your Claim</h4>
+                        <form id="claimForm">
+                            <div class="mb-3">
+                                <label for="fullName" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="insuranceNumber" class="form-label">Insurance Number</label>
+                                <input type="text" class="form-control" id="insuranceNumber" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" id="submitClaimBtn" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane me-2"></i>Submit Claim
+                                    <span id="submitClaimSpinner" class="spinner-border spinner-border-sm ms-2" role="status" style="display: none;">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="confirmationModalLabel">Claim Submitted Successfully</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-check-circle text-success fa-4x"></i>
+                    </div>
+                    <p>Thank you for submitting your claim. We will contact you regarding the further steps shortly!</p>
+                    <p>A confirmation has been sent to your email address.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -361,9 +423,13 @@
                 formData.append('file', currentFile);
                 formData.append('description', description);
 
-                // Show loading indicator
+                // Show loading indicators
                 loadingText.textContent = 'Calculating compensation...';
                 loadingCard.style.display = 'block';
+                
+                // Show spinner in button and disable button
+                document.getElementById('calculateSpinner').style.display = 'inline-block';
+                calculateBtn.disabled = true;
 
                 // Send request to server
                 fetch('/calculate_compensation', {
@@ -372,8 +438,10 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // Hide loading indicator
+                    // Hide loading indicators
                     loadingCard.style.display = 'none';
+                    document.getElementById('calculateSpinner').style.display = 'none';
+                    calculateBtn.disabled = false;
 
                     if (data.error) {
                         alert('Error: ' + data.error);
@@ -383,9 +451,74 @@
                     // Display compensation results
                     compensationContainer.style.display = 'block';
                     compensationAmount.textContent = data.compensation;
+                    
+                    // Show the claim form once compensation is calculated
+                    document.getElementById('claimFormContainer').style.display = 'block';
                 })
                 .catch(error => {
+                    // Hide loading indicators
                     loadingCard.style.display = 'none';
+                    document.getElementById('calculateSpinner').style.display = 'none';
+                    calculateBtn.disabled = false;
+                    
+                    alert('Error: ' + error.message);
+                });
+            });
+            
+            // Handle claim form submission
+            document.getElementById('claimForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const fullName = document.getElementById('fullName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const insuranceNumber = document.getElementById('insuranceNumber').value.trim();
+                
+                if (!fullName || !email || !insuranceNumber) {
+                    alert('Please fill out all fields');
+                    return;
+                }
+                
+                // Show loading spinner
+                document.getElementById('submitClaimSpinner').style.display = 'inline-block';
+                document.getElementById('submitClaimBtn').disabled = true;
+                
+                // Create form data for submission
+                const formData = new FormData();
+                formData.append('file', currentFile);
+                formData.append('description', damageDescription.value.trim());
+                formData.append('full_name', fullName);
+                formData.append('email', email);
+                formData.append('insurance_number', insuranceNumber);
+                formData.append('compensation', compensationAmount.textContent);
+                
+                // Send request to server
+                fetch('/submit_claim', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Hide loading spinner
+                    document.getElementById('submitClaimSpinner').style.display = 'none';
+                    document.getElementById('submitClaimBtn').disabled = false;
+                    
+                    if (data.error) {
+                        alert('Error: ' + data.error);
+                        return;
+                    }
+                    
+                    // Show confirmation modal
+                    const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+                    confirmationModal.show();
+                    
+                    // Reset the form
+                    document.getElementById('claimForm').reset();
+                })
+                .catch(error => {
+                    // Hide loading spinner
+                    document.getElementById('submitClaimSpinner').style.display = 'none';
+                    document.getElementById('submitClaimBtn').disabled = false;
+                    
                     alert('Error: ' + error.message);
                 });
             });
