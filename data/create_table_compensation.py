@@ -92,5 +92,3 @@ df = pd.read_csv("data/descriptions.csv")
 
 # Guardarlo en formato JSON
 df.to_json("data/descriptions.json", orient="records", force_ascii=False, indent=4)
-
-

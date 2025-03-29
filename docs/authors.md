@@ -2,5 +2,5 @@
 :relative-docs: docs/
 :relative-images:
 ```
-Aryan Verma 
+Aryan Verma
 José David Rico Días

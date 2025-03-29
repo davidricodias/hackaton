@@ -28,8 +28,8 @@ torch
 torch-vision
 tox
 tqdm
-webdriver-manager
 transformers
+webdriver-manager
 
 # Uncomment if needed
 # statsmodels

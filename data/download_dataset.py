@@ -99,4 +99,3 @@ for i, img in enumerate(list_img):
     ruta_nueva = os.path.join(url, f"real_{i}.jpg")
 
     os.rename(ruta_antigua, ruta_nueva)"""
-
