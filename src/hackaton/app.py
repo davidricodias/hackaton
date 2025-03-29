@@ -15,7 +15,11 @@ import json
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+# Initialize Flask app with proper static folder
+app = Flask(__name__, 
+            static_url_path='/static',
+            static_folder='static',
+            template_folder='templates')
 app.config['UPLOAD_FOLDER'] = tempfile.gettempdir()
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload
 

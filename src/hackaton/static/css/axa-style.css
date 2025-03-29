@@ -1,0 +1,208 @@
+:root {
+    --axa-blue: #00008f;
+    --axa-red: #ff1721;
+    --axa-light-blue: #3032c1;
+    --axa-gray: #f5f5f5;
+    --axa-dark-gray: #3a3a3a;
+    --axa-white: #ffffff;
+    --axa-black: #000000;
+}
+
+body {
+    background-color: var(--axa-white);
+    color: var(--axa-dark-gray);
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+.axa-header {
+    background-color: var(--axa-white);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+}
+
+.axa-logo {
+    height: 60px;
+}
+
+.axa-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.axa-hero {
+    background-color: var(--axa-blue);
+    color: var(--axa-white);
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.axa-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.axa-hero p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.axa-card {
+    background-color: var(--axa-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.axa-card:hover {
+    transform: translateY(-5px);
+}
+
+.axa-card-header {
+    background-color: var(--axa-blue);
+    color: var(--axa-white);
+    padding: 15px 20px;
+    font-weight: 600;
+}
+
+.axa-card-body {
+    padding: 20px;
+}
+
+.axa-btn {
+    background-color: var(--axa-blue);
+    color: var(--axa-white);
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.axa-btn:hover {
+    background-color: var(--axa-light-blue);
+    color: var(--axa-white);
+}
+
+.axa-btn-secondary {
+    background-color: var(--axa-white);
+    color: var(--axa-blue);
+    border: 2px solid var(--axa-blue);
+    border-radius: 4px;
+    padding: 8px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.axa-btn-secondary:hover {
+    background-color: var(--axa-blue);
+    color: var(--axa-white);
+}
+
+.upload-area {
+    border: 2px dashed var(--axa-blue);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: var(--axa-gray);
+}
+
+.upload-area:hover {
+    background-color: #e9ecef;
+    border-color: var(--axa-light-blue);
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.compensation-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--axa-blue);
+}
+
+.progress {
+    height: 15px;
+    border-radius: 10px;
+}
+
+.axa-footer {
+    background-color: var(--axa-blue);
+    color: var(--axa-white);
+    padding: 40px 0 20px;
+    margin-top: 60px;
+}
+
+.axa-footer h5 {
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.axa-footer a {
+    color: var(--axa-white);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.axa-footer a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.axa-loading {
+    padding: 40px;
+    text-align: center;
+}
+
+/* Upload success modal */
+.upload-success-modal .modal-header {
+    background-color: var(--axa-blue);
+    color: var(--axa-white);
+}
+
+.upload-success-icon {
+    color: var(--axa-blue);
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+/* Confirmation modal */
+.confirmation-modal .modal-header {
+    background-color: var(--axa-blue);
+    color: var(--axa-white);
+}
+
+.confirmation-icon {
+    color: var(--axa-blue);
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .axa-hero {
+        padding: 40px 0;
+    }
+    
+    .axa-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .axa-card-body {
+        padding: 15px;
+    }
+} 
