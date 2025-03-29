@@ -19,6 +19,8 @@ seaborn
 sphinx
 tox
 tqdm
+transformers
+jupyter
 
 # Uncomment if needed
 # statsmodels
