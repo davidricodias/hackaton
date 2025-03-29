@@ -4,6 +4,7 @@
 click
 ipympl
 ipython
+jupyter
 jupyterlab
 matplotlib
 nbdime
@@ -14,17 +15,17 @@ pre-commit
 pytest
 pytest-cov
 recommonmark
+scikit-learn
 scipy
 seaborn
 sphinx
 tox
 tqdm
 transformers
-jupyter
+
 
 # Uncomment if needed
 # statsmodels
-# scikit-learn
 # sktime
 # tslearn
 # xgboost
