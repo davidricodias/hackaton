@@ -9,6 +9,7 @@ jupyterlab
 matplotlib
 nbdime
 nbstripout
+num2words
 numpy
 pandas
 pillow
@@ -27,6 +28,7 @@ torch-vision
 tox
 tqdm
 transformers
+
 
 # Uncomment if needed
 # statsmodels
