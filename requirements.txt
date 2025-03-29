@@ -32,7 +32,7 @@ transformers
 # catboost
 # lightgbm
 # pytorch
-# tensorflow
+tensorflow
 # keras
 # spacy
 # optuna
