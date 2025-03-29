@@ -1,9 +1,9 @@
 
 # Editable install of hackaton
 -e .
-click
+click~=8.1.8
 ipympl
-ipython
+ipython~=8.18.1
 jupyterlab
 matplotlib
 nbdime
@@ -11,12 +11,12 @@ nbstripout
 numpy
 pandas
 pre-commit
-pytest
+pytest~=8.3.5
 pytest-cov
 recommonmark
 scipy
 seaborn
-sphinx
+sphinx~=7.4.7
 tox
 tqdm
 
@@ -41,3 +41,7 @@ tqdm
 # funsor
 # neptune-client
 # neptune-contrib
+
+importlib-metadata~=8.6.1
+streamlit~=1.44.0
+setuptools~=68.2.0
