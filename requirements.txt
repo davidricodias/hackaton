@@ -1,0 +1,43 @@
+
+# Editable install of hackaton
+-e .
+click
+ipympl
+ipython
+jupyterlab
+matplotlib
+nbdime
+nbstripout
+numpy
+pandas
+pre-commit
+pytest
+pytest-cov
+recommonmark
+scipy
+seaborn
+sphinx
+tox
+tqdm
+
+# Uncomment if needed
+# statsmodels
+# scikit-learn
+# sktime
+# tslearn
+# xgboost
+# catboost
+# lightgbm
+# pytorch
+# tensorflow
+# keras
+# spacy
+# optuna
+# dask
+# snakeviz
+# icecream
+# jax
+# numpyro
+# funsor
+# neptune-client
+# neptune-contrib
