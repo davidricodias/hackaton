@@ -27,6 +27,7 @@ torch-vision
 tox
 tqdm
 transformers
+fastapi
 
 # Uncomment if needed
 # statsmodels
