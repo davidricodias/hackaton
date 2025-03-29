@@ -4,32 +4,38 @@
 click
 ipympl
 ipython
+jupyter
 jupyterlab
 matplotlib
 nbdime
 nbstripout
 numpy
 pandas
+pillow
 pre-commit
 pytest
 pytest-cov
 recommonmark
+scikit-learn
 scipy
 seaborn
 sphinx
+tensorflow
+tf-keras
+torch
+torch-vision
 tox
 tqdm
+transformers
 
 # Uncomment if needed
 # statsmodels
-# scikit-learn
 # sktime
 # tslearn
 # xgboost
 # catboost
 # lightgbm
 # pytorch
-# tensorflow
 # keras
 # spacy
 # optuna
