@@ -11,6 +11,7 @@ nbdime
 nbstripout
 numpy
 pandas
+pillow
 pre-commit
 pytest
 pytest-cov
@@ -19,10 +20,13 @@ scikit-learn
 scipy
 seaborn
 sphinx
+tensorflow
+tf-keras
+torch
+torch-vision
 tox
 tqdm
 transformers
-
 
 # Uncomment if needed
 # statsmodels
@@ -32,7 +36,6 @@ transformers
 # catboost
 # lightgbm
 # pytorch
-tensorflow
 # keras
 # spacy
 # optuna
